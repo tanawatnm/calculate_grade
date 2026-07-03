@@ -1,1 +1,33 @@
 # calculate_grade
+def calculate_grade(scores): 
+    # 1. ตรวจสอบว่าลิสต์ว่างหรือไม่ เพื่อป้องกัน ZeroDivisionError
+    if not scores:
+        return "N/A", 0  # หรือจะ raise ValueError ก็ได้
+
+    # 2. ใช้ฟังก์ชัน sum() แทนการเขียน loop เอง เพื่อความกระชับและลดโอกาสผิดพลาด
+    total = sum(scores) 
+    
+    average = total / len(scores) 
+    
+    # 3. การตัดเกรด (ตรรกะเดิมถูกต้องแล้ว แต่จัดรูปแบบให้กระชับขึ้นได้)
+    if average >= 80: 
+        grade = "A" 
+    elif average >= 70: 
+        grade = "B" 
+    elif average >= 60: 
+        grade = "C" 
+    elif average >= 50: 
+        grade = "D" 
+    else: 
+        grade = "F" 
+
+    return grade, average 
+
+# ทดสอบการใช้งาน
+scores = [85, 92, 78, 88, 95] 
+grade, avg = calculate_grade(scores)
+print(f"Average: {avg:.2f}, Grade: {grade}")
+
+# ทดสอบกรณีลิสต์ว่าง (เพื่อดูว่า bug หายไปไหม)
+empty_scores = []
+print(calculate_grade([]))
